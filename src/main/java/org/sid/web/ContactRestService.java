@@ -7,6 +7,7 @@ import org.sid.entities.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.ApiParam;
 
 @RestController
+@CrossOrigin("*")
 public class ContactRestService {
 	@Autowired
 	private ContactRepository contactRepository;
@@ -35,7 +37,7 @@ public class ContactRestService {
 
 	}
 
-	@RequestMapping(value = "/contacts/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/contact/{id}", method = RequestMethod.GET)
 	public Contact getContact(@PathVariable Long id) {
 		return contactRepository.findOne(id);
 
@@ -47,7 +49,7 @@ public class ContactRestService {
 		return contactRepository.save(c);
 	}
 
-	@RequestMapping(value = "/saveContact{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/saveContact/{id}", method = RequestMethod.PUT)
 	public Contact saveContact(@PathVariable Long id, @RequestBody Contact c) {
 		c.setId(id);
 		System.out.println("Update");
